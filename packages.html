@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tour Packages - Shree Balaji Bus Travels</title>
+  
+  <meta name="description" content="Browse our luxury tour packages. Pilgrimage, adventure, family, and weekend tour bus bookings with accommodation and sightseeing.">
+  <link rel="icon" type="image/png" href="https://img.icons8.com/color/48/bus.png">
+
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- AOS Scroll Animations CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Custom Cursor Elements -->
+  <div class="custom-cursor"></div>
+  <div class="custom-cursor-follower"></div>
+
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
+
+  <!-- Preloader Screen -->
+  <div id="preloader">
+    <div class="loader-bus"><i class="fa-solid fa-bus"></i></div>
+    <div class="loader-road"></div>
+  </div>
+
+  <!-- --- NAVIGATION HEADER --- -->
+  <header>
+    <nav class="navbar navbar-expand-lg fixed-top sticky">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <i class="fa-solid fa-bus-simple me-2 text-primary"></i>Shree Balaji<span> Travels</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+          <div class="navbar-toggler-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <div class="navbar-brand-divider d-none d-lg-block"></div>
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="fleet.html">Fleet</a></li>
+            <li class="nav-item"><a class="nav-link active" href="packages.html">Packages</a></li>
+            <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+            <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="booking.html">Booking</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- --- BREADCRUMB HERO --- -->
+  <section class="section-padding pb-5 mt-5" style="background: radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.05) 0%, rgba(255,255,255,1) 100%);">
+    <div class="container text-center pt-5">
+      <span class="section-tag">Curated Tours</span>
+      <h1 class="font-headings fw-bold text-primary display-4">Holiday Tour Packages</h1>
+      <p class="text-muted max-width-600 mx-auto">Explore top travel hubs in India with our all-inclusive family and group packages.</p>
+    </div>
+  </section>
+
+  <!-- --- SEARCH & FILTER SECTION --- -->
+  <section class="py-4 bg-light border-bottom border-top">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="input-group">
+            <span class="input-group-text bg-white border-end-0 text-muted"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input type="text" id="searchPackage" class="form-control border-start-0 ps-0" placeholder="Search destinations...">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <select id="filterPackageCategory" class="form-select">
+            <option value="all">All Holiday Themes</option>
+            <option value="family">Family Tours</option>
+            <option value="pilgrimage">Pilgrimage / Spiritual</option>
+            <option value="adventure">Hill Station & Adventure</option>
+            <option value="beach">Beach Escapes</option>
+            <option value="weekend">Weekend Getaways</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <select id="sortPrice" class="form-select">
+            <option value="default">Sort by Price</option>
+            <option value="low-to-high">Price: Low to High</option>
+            <option value="high-to-low">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- PACKAGES CONTAINER --- -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="row" id="packagesContainer">
+        <!-- Package 1 -->
+        <div class="col-lg-4 col-md-6 package-card-item" data-id="1" data-package-category="beach" data-price="7999" data-aos="fade-up" data-aos-delay="100">
+          <div class="package-card glass-card">
+            <div class="package-card-img-wrapper">
+              <span class="card-badge">Popular</span>
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Goa Tour" class="package-card-img">
+            </div>
+            <div class="card-body-custom">
+              <h3 class="card-title text-primary font-headings fw-bold fs-4">Golden Sands Goa Escape</h3>
+              <p class="card-text text-muted small">Sun-kissed beaches, heritage churches, and exciting water sports. Includes a luxury coach sight-seeing tour.</p>
+              
+              <div class="d-flex justify-content-between align-items-center border-top pt-3 mb-3">
+                <span class="fw-bold text-accent"><i class="fa-regular fa-clock me-1 text-primary"></i> 3 N / 4 D</span>
+                <span class="fs-5 fw-bold text-primary">₹7,999</span>
+              </div>
+              
+              <div class="text-secondary small mb-3 border-bottom pb-2">
+                <strong>Includes:</strong> AC Bus • 3★ Hotel • Breakfast • Tour Guide
+              </div>
+              
+              <a href="booking.html?busType=Volvo&specialRequest=Golden%20Sands%20Goa" class="btn-premium btn-premium-primary w-100 justify-content-center">Book Tour Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Package 2 -->
+        <div class="col-lg-4 col-md-6 package-card-item" data-id="2" data-package-category="pilgrimage" data-price="18500" data-aos="fade-up" data-aos-delay="200">
+          <div class="package-card glass-card">
+            <div class="package-card-img-wrapper">
+              <span class="card-badge">Pilgrimage</span>
+              <img src="https://www.tourmyindia.com/blog/wp-content/uploads/2018/02/chardham-yatra-travel-tips.jpg" alt="Chardham Tour" class="package-card-img">
+            </div>
+            <div class="card-body-custom">
+              <h3 class="card-title text-primary font-headings fw-bold fs-4">Divya Chardham Yatra</h3>
+              <p class="card-text text-muted small">Embark on a sacred journey covering Yamunotri, Gangotri, Kedarnath, and Badrinath. Safe driving protocols.</p>
+              
+              <div class="d-flex justify-content-between align-items-center border-top pt-3 mb-3">
+                <span class="fw-bold text-accent"><i class="fa-regular fa-clock me-1 text-primary"></i> 9 N / 10 D</span>
+                <span class="fs-5 fw-bold text-primary">₹18,500</span>
+              </div>
+
+              <div class="text-secondary small mb-3 border-bottom pb-2">
+                <strong>Includes:</strong> Pushback Bus • Dharmshala • Meals • Medical Kit
+              </div>
+
+              <a href="booking.html?busType=Scania&specialRequest=Divya%20Chardham%20Yatra" class="btn-premium btn-premium-primary w-100 justify-content-center">Book Tour Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Package 3 -->
+        <div class="col-lg-4 col-md-6 package-card-item" data-id="3" data-package-category="adventure" data-price="11499" data-aos="fade-up" data-aos-delay="300">
+          <div class="package-card glass-card">
+            <div class="package-card-img-wrapper">
+              <span class="card-badge">Hill Station</span>
+              <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Manali Tour" class="package-card-img">
+            </div>
+            <div class="card-body-custom">
+              <h3 class="card-title text-primary font-headings fw-bold fs-4">Himachal Snow Peaks Tour</h3>
+              <p class="card-text text-muted small">Explore breathtaking Solang Valley, Rohtang Pass, and Mall Road in Shimla & Manali. Heated hotel stays.</p>
+              
+              <div class="d-flex justify-content-between align-items-center border-top pt-3 mb-3">
+                <span class="fw-bold text-accent"><i class="fa-regular fa-clock me-1 text-primary"></i> 5 N / 6 D</span>
+                <span class="fs-5 fw-bold text-primary">₹11,499</span>
+              </div>
+
+              <div class="text-secondary small mb-3 border-bottom pb-2">
+                <strong>Includes:</strong> Volvo AC Sleeper • Deluxe Room • Food • Sightseeing
+              </div>
+
+              <a href="booking.html?busType=Volvo&specialRequest=Himachal%20Snow%20peaks" class="btn-premium btn-premium-primary w-100 justify-content-center">Book Tour Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Package 4 -->
+        <div class="col-lg-4 col-md-6 package-card-item" data-id="4" data-package-category="family" data-price="5500" data-aos="fade-up" data-aos-delay="100">
+          <div class="package-card glass-card">
+            <div class="package-card-img-wrapper">
+              <span class="card-badge">Family Special</span>
+              <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80" alt="Ooty Tour" class="package-card-img">
+            </div>
+            <div class="card-body-custom">
+              <h3 class="card-title text-primary font-headings fw-bold fs-4">Ooty Botanical Wonders</h3>
+              <p class="card-text text-muted small">Unwind in the misty hills of Nilgiris, visiting tea estates, botanical gardens, and scenic Ooty lake.</p>
+              
+              <div class="d-flex justify-content-between align-items-center border-top pt-3 mb-3">
+                <span class="fw-bold text-accent"><i class="fa-regular fa-clock me-1 text-primary"></i> 2 N / 3 D</span>
+                <span class="fs-5 fw-bold text-primary">₹5,500</span>
+              </div>
+
+              <div class="text-secondary small mb-3 border-bottom pb-2">
+                <strong>Includes:</strong> Deluxe Coach • Cottage • Breakfast • Sightseeing
+              </div>
+
+              <a href="booking.html?busType=Semi Sleeper&specialRequest=Ooty%20Botanical" class="btn-premium btn-premium-primary w-100 justify-content-center">Book Tour Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Package 5 -->
+        <div class="col-lg-4 col-md-6 package-card-item" data-id="5" data-package-category="weekend" data-price="3200" data-aos="fade-up" data-aos-delay="200">
+          <div class="package-card glass-card">
+            <div class="package-card-img-wrapper">
+              <span class="card-badge">Weekend Pack</span>
+              <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Mahabaleshwar Tour" class="package-card-img">
+            </div>
+            <div class="card-body-custom">
+              <h3 class="card-title text-primary font-headings fw-bold fs-4">Mahabaleshwar Strawberry Tour</h3>
+              <p class="card-text text-muted small">A short, refreshing weekend trip to Panchgani & Mahabaleshwar. Perfect for couples and friends.</p>
+              
+              <div class="d-flex justify-content-between align-items-center border-top pt-3 mb-3">
+                <span class="fw-bold text-accent"><i class="fa-regular fa-clock me-1 text-primary"></i> 1 N / 2 D</span>
+                <span class="fs-5 fw-bold text-primary">₹3,200</span>
+              </div>
+
+              <div class="text-secondary small mb-3 border-bottom pb-2">
+                <strong>Includes:</strong> AC Seater Bus • Standard Hotel • Sightseeing
+              </div>
+
+              <a href="booking.html?busType=Semi Sleeper&specialRequest=Mahabaleshwar%20Strawberry" class="btn-premium btn-premium-primary w-100 justify-content-center">Book Tour Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Package 6 -->
+        <div class="col-lg-4 col-md-6 package-card-item" data-id="6" data-package-category="pilgrimage" data-price="9500" data-aos="fade-up" data-aos-delay="300">
+          <div class="package-card glass-card">
+            <div class="package-card-img-wrapper">
+              <span class="card-badge">Popular</span>
+              <img src="https://th.bing.com/th/id/OIP.LUzleS7JyfacK_bxat_gzwHaEK?w=322&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Varanasi Tour" class="package-card-img">
+            </div>
+            <div class="card-body-custom">
+              <h3 class="card-title text-primary font-headings fw-bold fs-4">Kashi Vishwanath Darshan</h3>
+              <p class="card-text text-muted small">Covering the sacred Ganga Aarti, historical temples of Varanasi, Sarnath museum, and surrounding spots.</p>
+              
+              <div class="d-flex justify-content-between align-items-center border-top pt-3 mb-3">
+                <span class="fw-bold text-accent"><i class="fa-regular fa-clock me-1 text-primary"></i> 3 N / 4 D</span>
+                <span class="fs-5 fw-bold text-primary">₹9,500</span>
+              </div>
+
+              <div class="text-secondary small mb-3 border-bottom pb-2">
+                <strong>Includes:</strong> Volvo Sleeper • Hotel • 2 Meals Daily • Puja VIP Passes
+              </div>
+
+              <a href="booking.html?busType=Volvo&specialRequest=Kashi%20Vishwanath%20Darshan" class="btn-premium btn-premium-primary w-100 justify-content-center">Book Tour Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Package 7 -->
+        <div class="col-lg-4 col-md-6 package-card-item" data-id="7" data-package-category="family" data-price="13500" data-aos="fade-up" data-aos-delay="100">
+          <div class="package-card glass-card">
+            <div class="package-card-img-wrapper">
+              <span class="card-badge">Heritage</span>
+              <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=800&q=80" alt="Rajasthan Tour" class="package-card-img">
+            </div>
+            <div class="card-body-custom">
+              <h3 class="card-title text-primary font-headings fw-bold fs-4">Royal Rajasthan Heritage</h3>
+              <p class="card-text text-muted small">Explore royal palaces, forts, and vibrant markets in Jaipur and Udaipur. Includes heritage hotel stays and local guide.</p>
+              
+              <div class="d-flex justify-content-between align-items-center border-top pt-3 mb-3">
+                <span class="fw-bold text-accent"><i class="fa-regular fa-clock me-1 text-primary"></i> 4 N / 5 D</span>
+                <span class="fs-5 fw-bold text-primary">₹13,500</span>
+              </div>
+
+              <div class="text-secondary small mb-3 border-bottom pb-2">
+                <strong>Includes:</strong> Mercedes AC Coach • Heritage Hotel • Sightseeing
+              </div>
+
+              <a href="booking.html?busType=Scania&specialRequest=Royal%20Rajasthan%20Heritage" class="btn-premium btn-premium-primary w-100 justify-content-center">Book Tour Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Package 8 -->
+        <div class="col-lg-4 col-md-6 package-card-item" data-id="8" data-package-category="pilgrimage" data-price="6200" data-aos="fade-up" data-aos-delay="200">
+          <div class="package-card glass-card">
+            <div class="package-card-img-wrapper">
+              <span class="card-badge">Pilgrimage</span>
+              <img src="https://images.unsplash.com/photo-1514222134-b57cbb8ce073?auto=format&fit=crop&w=800&q=80" alt="Amritsar Golden Temple Yatra" class="package-card-img">
+            </div>
+            <div class="card-body-custom">
+              <h3 class="card-title text-primary font-headings fw-bold fs-4">Amritsar Golden Temple Yatra</h3>
+              <p class="card-text text-muted small">Sacred visit to Harmandir Sahib (Golden Temple), Jallianwala Bagh, and Wagah Border ceremony. Secure and convenient travel.</p>
+              
+              <div class="d-flex justify-content-between align-items-center border-top pt-3 mb-3">
+                <span class="fw-bold text-accent"><i class="fa-regular fa-clock me-1 text-primary"></i> 2 N / 3 D</span>
+                <span class="fs-5 fw-bold text-primary">₹6,200</span>
+              </div>
+
+              <div class="text-secondary small mb-3 border-bottom pb-2">
+                <strong>Includes:</strong> Volvo AC Bus • 3★ Hotel • Langar Seva • Tour Escort
+              </div>
+
+              <a href="booking.html?busType=Volvo&specialRequest=Amritsar%20Golden%20Temple" class="btn-premium btn-premium-primary w-100 justify-content-center">Book Tour Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Package 9 -->
+        <div class="col-lg-4 col-md-6 package-card-item" data-id="9" data-package-category="adventure" data-price="15999" data-aos="fade-up" data-aos-delay="300">
+          <div class="package-card glass-card">
+            <div class="package-card-img-wrapper">
+              <span class="card-badge">Hill Station</span>
+              <img src="https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=800&q=80" alt="Kerala Backwaters" class="package-card-img">
+            </div>
+            <div class="card-body-custom">
+              <h3 class="card-title text-primary font-headings fw-bold fs-4">Kerala Backwaters & Munnar</h3>
+              <p class="card-text text-muted small">Experience serene tea estates in Munnar and premium houseboat cruise in Alleppey backwaters. Lush green escapes.</p>
+              
+              <div class="d-flex justify-content-between align-items-center border-top pt-3 mb-3">
+                <span class="fw-bold text-accent"><i class="fa-regular fa-clock me-1 text-primary"></i> 6 N / 7 D</span>
+                <span class="fs-5 fw-bold text-primary">₹15,999</span>
+              </div>
+
+              <div class="text-secondary small mb-3 border-bottom pb-2">
+                <strong>Includes:</strong> Luxury Sleeper • Hotel & Houseboat • Meals • Sightseeing
+              </div>
+
+              <a href="booking.html?busType=Volvo&specialRequest=Kerala%20Backwaters" class="btn-premium btn-premium-primary w-100 justify-content-center">Book Tour Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Package 10 -->
+        <div class="col-lg-4 col-md-6 package-card-item" data-id="10" data-package-category="weekend" data-price="4500" data-aos="fade-up" data-aos-delay="100">
+          <div class="package-card glass-card">
+            <div class="package-card-img-wrapper">
+              <span class="card-badge">Weekend Retreat</span>
+              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80" alt="Nainital Tour" class="package-card-img">
+            </div>
+            <div class="card-body-custom">
+              <h3 class="card-title text-primary font-headings fw-bold fs-4">Nainital Lake Retreat</h3>
+              <p class="card-text text-muted small">Boat rides on pristine Naini Lake, Mall Road shopping, Naina Devi Temple, and scenic cable car rides over the Himalayas.</p>
+              <div class="d-flex justify-content-between align-items-center border-top pt-3 mb-3">
+                <span class="fw-bold text-accent"><i class="fa-regular fa-clock me-1 text-primary"></i> 2 N / 3 D</span>
+                <span class="fs-5 fw-bold text-primary">₹4,500</span>
+              </div>
+              <div class="text-secondary small mb-3 border-bottom pb-2">
+                <strong>Includes:</strong> Volvo AC Coach • Hill Resort • Breakfast • Sightseeing
+              </div>
+              <a href="booking.html?busType=Volvo&specialRequest=Nainital%20Lake%20Retreat" class="btn-premium btn-premium-primary w-100 justify-content-center">Book Tour Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Package 11 -->
+        <div class="col-lg-4 col-md-6 package-card-item" data-id="11" data-package-category="pilgrimage" data-price="5800" data-aos="fade-up" data-aos-delay="200">
+          <div class="package-card glass-card">
+            <div class="package-card-img-wrapper">
+              <span class="card-badge">Spiritual</span>
+              <img src="https://www.asparkholidays.com/uploads/35589_Shirdi-Sai-Baba-Temple..jpg" alt="Shirdi Tour" class="package-card-img">
+            </div>
+            <div class="card-body-custom">
+              <h3 class="card-title text-primary font-headings fw-bold fs-4">Shirdi Sai Baba Yatra</h3>
+              <p class="card-text text-muted small">Seek blessings at the world-famous Sai Baba Mandir in Shirdi with comfortable overnight coach journey. Includes pooja arrangements.</p>
+              <div class="d-flex justify-content-between align-items-center border-top pt-3 mb-3">
+                <span class="fw-bold text-accent"><i class="fa-regular fa-clock me-1 text-primary"></i> 2 N / 3 D</span>
+                <span class="fs-5 fw-bold text-primary">₹5,800</span>
+              </div>
+              <div class="text-secondary small mb-3 border-bottom pb-2">
+                <strong>Includes:</strong> Sleeper Bus • Dharamshala Stay • Meals • Pooja Pass
+              </div>
+              <a href="booking.html?busType=AC Sleeper&specialRequest=Shirdi%20Sai%20Baba%20Yatra" class="btn-premium btn-premium-primary w-100 justify-content-center">Book Tour Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Package 12 -->
+        <div class="col-lg-4 col-md-6 package-card-item" data-id="12" data-package-category="beach" data-price="24999" data-aos="fade-up" data-aos-delay="300">
+          <div class="package-card glass-card">
+            <div class="package-card-img-wrapper">
+              <span class="card-badge">Luxury</span>
+              <img src="https://images.unsplash.com/photo-1537956965359-7573183d1f57?auto=format&fit=crop&w=800&q=80" alt="Andaman Tour" class="package-card-img">
+            </div>
+            <div class="card-body-custom">
+              <h3 class="card-title text-primary font-headings fw-bold fs-4">Andaman Island Explorer</h3>
+              <p class="card-text text-muted small">Crystal-clear waters, coral reefs at Havelock Island, Radhanagar Beach, and cellular jail light show. Premium island getaway.</p>
+              <div class="d-flex justify-content-between align-items-center border-top pt-3 mb-3">
+                <span class="fw-bold text-accent"><i class="fa-regular fa-clock me-1 text-primary"></i> 6 N / 7 D</span>
+                <span class="fs-5 fw-bold text-primary">₹24,999</span>
+              </div>
+              <div class="text-secondary small mb-3 border-bottom pb-2">
+                <strong>Includes:</strong> Luxury Coach + Ferry • 4★ Resort • All Meals • Island Tour
+              </div>
+              <a href="booking.html?busType=Scania&specialRequest=Andaman%20Island%20Explorer" class="btn-premium btn-premium-primary w-100 justify-content-center">Book Tour Now</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- --- FOOTER --- -->
+  <footer class="mt-0">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <a class="navbar-brand text-white d-block mb-3" href="index.html">
+            <i class="fa-solid fa-bus-simple me-2 text-primary"></i>Shree Balaji<span> Travels</span>
+          </a>
+          <p>Leading luxury bus travel operator in India. Safe, comfortable, and timely trips matching global standards.</p>
+          <div class="footer-social-links">
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="fleet.html">Bus Fleet</a></li>
+            <li><a href="packages.html">Tour Packages</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h5>Our Services</h5>
+          <ul class="list-unstyled">
+            <li><a href="services.html">Corporate Rental</a></li>
+            <li><a href="services.html">Wedding Transport</a></li>
+            <li><a href="services.html">School Trips</a></li>
+            <li><a href="services.html">Pilgrimage Tours</a></li>
+            <li><a href="services.html">Airport Pickups</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h5>Newsletter</h5>
+          <p>Subscribe for exclusive travel offers and discounts.</p>
+          <form class="newsletter-form mt-3">
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="Email Address" required>
+              <button type="submit" class="btn">Join</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center">
+        <div>
+          &copy; 2026 Shree Balaji Bus Travels. All Rights Reserved. | <a href="privacy.html" class="mx-1">Privacy</a> | <a href="terms.html" class="mx-1">Terms</a>
+        </div>
+        <div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- --- FLOATING FLOATING WIDGETS --- -->
+  <div class="floating-widgets">
+    <a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20book%20a%20bus." target="_blank" class="btn-floating btn-floating-whatsapp" title="WhatsApp Booking">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <a href="tel:+919999999999" class="btn-floating btn-floating-call" title="Emergency Call Now">
+      <i class="fa-solid fa-phone"></i>
+    </a>
+    <a href="#" class="btn-floating btn-floating-top" title="Back to Top">
+      <i class="fa-solid fa-arrow-up"></i>
+    </a>
+  </div>
+
+  <!-- Bootstrap 5 Bundle JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS Scroll Animation Library CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <!-- Package sort script -->
+  <script src="js/fleet-packages.js"></script>
+  <!-- Core script -->
+  <script src="js/main.js"></script>
+</body>
+</html>

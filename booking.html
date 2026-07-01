@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Tickets - Shree Balaji Bus Travels</title>
+  <meta name="description" content="Book your luxury bus tickets online with Shree Balaji Bus Travels. Multi-step booking wizard with seat selection, route planning, and instant WhatsApp confirmation.">
+  <link rel="icon" type="image/png" href="https://img.icons8.com/color/48/bus.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+  <style>
+    /* ── BOOKING WIZARD STYLES ── */
+    .booking-hero {
+      background: radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.05) 0%, rgba(255,255,255,1) 100%);
+      padding: 140px 0 80px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .booking-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: rgba(0,180,200,0.04);
+      border-radius: 50%;
+      animation: pulse-bg 6s infinite alternate;
+    }
+    .booking-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -5%;
+      width: 400px;
+      height: 400px;
+      background: rgba(212,160,48,0.03);
+      border-radius: 50%;
+      animation: pulse-bg 8s infinite alternate-reverse;
+    }
+    @keyframes pulse-bg {
+      0% { transform: scale(1); opacity: 0.5; }
+      100% { transform: scale(1.3); opacity: 1; }
+    }
+
+    /* Progress Steps */
+    .wizard-progress {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin: 40px 0 0;
+      position: relative;
+      z-index: 2;
+    }
+    .wizard-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+    }
+    .wizard-step-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: rgba(27, 61, 126, 0.05);
+      border: 2px solid rgba(27, 61, 126, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      transition: all 0.4s ease;
+      backdrop-filter: blur(10px);
+    }
+    .wizard-step.active .wizard-step-icon {
+      background: #D4A030;
+      border-color: #D4A030;
+      color: white;
+      box-shadow: 0 0 0 6px rgba(212,160,48,0.25);
+      transform: scale(1.1);
+    }
+    .wizard-step.completed .wizard-step-icon {
+      background: #00B4C8;
+      border-color: #00B4C8;
+      color: white;
+    }
+    .wizard-step-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    .wizard-step.active .wizard-step-label,
+    .wizard-step.completed .wizard-step-label {
+      color: var(--text-main);
+    }
+    .wizard-connector {
+      width: 80px;
+      height: 2px;
+      background: rgba(27, 61, 126, 0.15);
+      margin: 0 4px;
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+    .wizard-connector.filled {
+      background: #00B4C8;
+    }
+
+    /* Step Panels */
+    .booking-step-panel {
+      display: none;
+      animation: fadeSlideIn 0.45s ease;
+    }
+    .booking-step-panel.active {
+      display: block;
+    }
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Step 1: Route Selection */
+    .route-input-group {
+      position: relative;
+    }
+    .route-input-group .form-control,
+    .route-input-group .form-select {
+      padding: 16px 20px 16px 52px;
+      border: 1.5px solid #e0ecf5;
+      border-radius: 14px;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      background: #f8fbff;
+    }
+    .route-input-group .form-control:focus,
+    .route-input-group .form-select:focus {
+      border-color: #00B4C8;
+      box-shadow: 0 0 0 4px rgba(0,180,200,0.1);
+      background: white;
+    }
+    .route-input-group .input-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #1B3D7E;
+      font-size: 1rem;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .swap-btn {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #1B3D7E, #00B4C8);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 15px rgba(27,61,126,0.3);
+    }
+    .swap-btn:hover {
+      transform: rotate(180deg) scale(1.1);
+    }
+
+    /* Bus Class Cards */
+    .bus-class-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .bus-class-card {
+      border: 2px solid #e8f0f8;
+      border-radius: 16px;
+      padding: 20px 16px;
+      cursor: pointer;
+      transition: all 0.35s ease;
+      background: white;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .bus-class-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #1B3D7E, #00B4C8);
+      transform: scaleX(0);
+      transition: transform 0.35s ease;
+    }
+    .bus-class-card:hover,
+    .bus-class-card.selected {
+      border-color: #00B4C8;
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(0,180,200,0.15);
+    }
+    .bus-class-card.selected::before {
+      transform: scaleX(1);
+    }
+    .bus-class-card .check-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 22px;
+      height: 22px;
+      background: #00B4C8;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      color: white;
+    }
+    .bus-class-card.selected .check-badge {
+      display: flex;
+    }
+    .bus-class-card .bus-icon-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e4f5f9, #d0edf5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: #1B3D7E;
+      margin: 0 auto 12px;
+      transition: all 0.35s ease;
+    }
+    .bus-class-card.selected .bus-icon-circle,
+    .bus-class-card:hover .bus-icon-circle {
+      background: linear-gradient(135deg, #1B3D7E, #00B4C8);
+      color: white;
+    }
+    .bus-class-card .bus-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #0d1f3c;
+      margin-bottom: 4px;
+    }
+    .bus-class-card .bus-price {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #1B3D7E;
+    }
+    .bus-class-card .bus-tag {
+      font-size: 0.72rem;
+      color: #4a6080;
+      margin-top: 2px;
+    }
+
+    /* Step 2: Seat Map */
+    .seat-map-container {
+      background: linear-gradient(180deg, #f8fbff 0%, #eef6fc 100%);
+      border-radius: 20px;
+      padding: 30px;
+      border: 1.5px solid #ddeef8;
+    }
+    .bus-front {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .bus-front-shape {
+      background: linear-gradient(135deg, #1B3D7E, #00B4C8);
+      color: white;
+      border-radius: 50px 50px 0 0;
+      padding: 10px 40px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+    }
+    .seat-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .seat-aisle {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #7a9ab5;
+      font-weight: 600;
+    }
+    .seat-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px 8px 4px 4px;
+      border: 1.5px solid #c5ddf0;
+      background: white;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #4a6080;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .seat-btn::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 4px;
+      right: 4px;
+      height: 4px;
+      background: #c5ddf0;
+      border-radius: 0 0 4px 4px;
+      transition: background 0.25s ease;
+    }
+    .seat-btn:hover:not(.booked) {
+      border-color: #00B4C8;
+      background: #e4f5f9;
+      transform: translateY(-2px);
+    }
+    .seat-btn.selected {
+      background: linear-gradient(135deg, #D4A030, #e8b840);
+      border-color: #D4A030;
+      color: white;
+      box-shadow: 0 6px 15px rgba(212,160,48,0.3);
+      transform: translateY(-2px);
+    }
+    .seat-btn.selected::after { background: #b88a20; }
+    .seat-btn.booked {
+      background: #f0f0f5;
+      border-color: #d5d5e5;
+      color: #aaa;
+      cursor: not-allowed;
+    }
+    .seat-btn.booked::after { background: #d5d5e5; }
+    .seat-legend {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .seat-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #4a6080;
+    }
+    .legend-box {
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      border: 1.5px solid transparent;
+    }
+    .legend-available { background: white; border-color: #c5ddf0; }
+    .legend-booked { background: #f0f0f5; border-color: #d5d5e5; }
+    .legend-selected { background: linear-gradient(135deg, #D4A030, #e8b840); border-color: #D4A030; }
+
+    /* Selected Seats Tags */
+    .selected-seats-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-height: 40px;
+    }
+    .seat-tag {
+      background: linear-gradient(135deg, #D4A030, #e8b840);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      animation: popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes popIn {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .seat-tag .remove-seat {
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .seat-tag .remove-seat:hover { opacity: 1; }
+
+    /* Step 3: Passenger Info */
+    .premium-input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .premium-input-group label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #1B3D7E;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .premium-input-group .form-control,
+    .premium-input-group .form-select,
+    .premium-input-group textarea {
+      border: 1.5px solid #ddeef8;
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      background: #f8fbff;
+    }
+    .premium-input-group .form-control:focus,
+    .premium-input-group .form-select:focus,
+    .premium-input-group textarea:focus {
+      border-color: #00B4C8;
+      box-shadow: 0 0 0 4px rgba(0,180,200,0.1);
+      background: white;
+    }
+
+    /* Fare Summary Card */
+    .fare-summary-card {
+      background: linear-gradient(135deg, #1B3D7E 0%, #0d2b5e 100%);
+      border-radius: 20px;
+      padding: 28px;
+      color: white;
+      position: sticky;
+      top: 100px;
+    }
+    .fare-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+    }
+    .fare-row:last-child { border-bottom: none; }
+    .fare-total {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #D4A030;
+    }
+    .trust-badges {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .trust-badge {
+      flex: 1;
+      background: rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 12px 8px;
+      text-align: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .trust-badge i {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+      color: #00B4C8;
+    }
+
+    /* Step Navigation Buttons */
+    .step-nav-btn {
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .step-nav-btn.primary {
+      background: linear-gradient(135deg, #1B3D7E, #00B4C8);
+      color: white;
+      box-shadow: 0 10px 25px rgba(27,61,126,0.25);
+    }
+    .step-nav-btn.primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(27,61,126,0.35);
+    }
+    .step-nav-btn.secondary {
+      background: white;
+      color: #1B3D7E;
+      border: 2px solid #ddeef8;
+    }
+    .step-nav-btn.secondary:hover {
+      border-color: #00B4C8;
+      color: #00B4C8;
+    }
+    .step-nav-btn.whatsapp {
+      background: linear-gradient(135deg, #25d366, #20ba5a);
+      color: white;
+      box-shadow: 0 10px 25px rgba(37,211,102,0.25);
+    }
+    .step-nav-btn.crimson {
+      background: linear-gradient(135deg, #8B1A4A, #6a123a);
+      color: white;
+      box-shadow: 0 10px 25px rgba(139,26,74,0.25);
+    }
+    .step-nav-btn.crimson:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(139,26,74,0.35);
+    }
+
+    /* Section heading style inside form */
+    .step-section-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #00B4C8;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .step-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, #ddeef8, transparent);
+    }
+
+    /* Responsive */
+    @media (max-width: 767.98px) {
+      .wizard-connector { width: 30px; }
+      .bus-class-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor"></div>
+  <div class="custom-cursor-follower"></div>
+  <div id="scroll-progress"></div>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="loader-bus"><i class="fa-solid fa-bus"></i></div>
+    <div class="loader-road"></div>
+  </div>
+
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar navbar-expand-lg fixed-top sticky">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <i class="fa-solid fa-bus-simple"></i>Shree Balaji<span> Travels</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+          <div class="navbar-toggler-icon"><span></span><span></span><span></span></div>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <div class="navbar-brand-divider d-none d-lg-block"></div>
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="fleet.html">Fleet</a></li>
+            <li class="nav-item"><a class="nav-link" href="packages.html">Packages</a></li>
+            <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+            <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+            <li class="nav-item"><a class="nav-link active" href="booking.html">Booking</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ── BOOKING HERO ── -->
+  <div class="booking-hero">
+    <div class="container text-center position-relative" style="z-index:2;">
+      <span style="background:rgba(212,160,48,0.2); color:#D4A030; border:1px solid rgba(212,160,48,0.4); padding:6px 18px; border-radius:50px; font-size:0.78rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em;">
+        <i class="fa-solid fa-ticket me-1"></i> Premium Booking Portal
+      </span>
+      <h1 class="display-4 fw-bold mt-3 mb-2" style="font-family:var(--font-headings); color:#0d1f3c;">Reserve Your <span style="font-family:var(--font-script); color:#D4A030; font-size:1.2em;">Seat</span></h1>
+      <p class="text-muted fs-5 mb-0">3-step easy booking • Instant WhatsApp confirmation • Best fares guaranteed</p>
+
+      <!-- Wizard Progress -->
+      <div class="wizard-progress mt-5 justify-content-center flex-wrap gap-2">
+        <div class="wizard-step active" id="step-indicator-1">
+          <div class="wizard-step-icon"><i class="fa-solid fa-route"></i></div>
+          <div class="wizard-step-label">Route & Class</div>
+        </div>
+        <div class="wizard-connector" id="connector-1-2"></div>
+        <div class="wizard-step" id="step-indicator-2">
+          <div class="wizard-step-icon"><i class="fa-solid fa-chair"></i></div>
+          <div class="wizard-step-label">Select Seats</div>
+        </div>
+        <div class="wizard-connector" id="connector-2-3"></div>
+        <div class="wizard-step" id="step-indicator-3">
+          <div class="wizard-step-icon"><i class="fa-solid fa-user"></i></div>
+          <div class="wizard-step-label">Passenger Info</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BOOKING BODY ── -->
+  <section class="py-5" style="background: linear-gradient(180deg,#e4f5f9 0%,#f8fbff 100%);">
+    <div class="container">
+      <div class="row g-4 align-items-start">
+
+        <!-- LEFT: Wizard Steps -->
+        <div class="col-lg-8">
+
+          <!-- ══ STEP 1: Route & Class ══ -->
+          <div class="booking-step-panel active" id="step-panel-1" data-aos="fade-up">
+            <div class="glass-card bg-white p-4 p-lg-5">
+
+              <div class="step-section-title"><i class="fa-solid fa-route"></i> Route Details</div>
+
+              <!-- From / To -->
+              <div class="row g-3 align-items-end mb-4">
+                <div class="col-md-5">
+                  <label class="form-label fw-bold text-primary fs-sm mb-2"><i class="fa-solid fa-circle-dot me-1 text-accent"></i> FROM</label>
+                  <div class="route-input-group">
+                    <i class="fa-solid fa-location-dot input-icon" style="color:#00B4C8;"></i>
+                    <select class="form-select" id="pickupPoint">
+                      <option value="" disabled selected>Select Pickup City</option>
+                      <option value="Delhi">Delhi — ISBT Kashmiri Gate</option>
+                      <option value="Mumbai">Mumbai — Sion Circle</option>
+                      <option value="Bangalore">Bangalore — Majestic</option>
+                      <option value="Chennai">Chennai — Koyambedu</option>
+                      <option value="Pune">Pune — Swargate</option>
+                      <option value="Hyderabad">Hyderabad — Mahatma Gandhi</option>
+                      <option value="Ahmedabad">Ahmedabad — Geeta Mandir</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-2 text-center pb-1">
+                  <button class="swap-btn" id="swapCities" title="Swap cities">
+                    <i class="fa-solid fa-right-left"></i>
+                  </button>
+                </div>
+                <div class="col-md-5">
+                  <label class="form-label fw-bold text-primary fs-sm mb-2"><i class="fa-solid fa-flag me-1" style="color:#8B1A4A;"></i> TO</label>
+                  <div class="route-input-group">
+                    <i class="fa-solid fa-location-crosshairs input-icon" style="color:#8B1A4A;"></i>
+                    <select class="form-select" id="dropPoint">
+                      <option value="" disabled selected>Select Drop City</option>
+                      <option value="Manali">Manali — Private Bus Stand</option>
+                      <option value="Goa">Goa — Panaji</option>
+                      <option value="Ooty">Ooty — Main Bus Stand</option>
+                      <option value="Mahabaleshwar">Mahabaleshwar — Center</option>
+                      <option value="Shimla">Shimla — ISBT Tutikandi</option>
+                      <option value="Nainital">Nainital — Tallital</option>
+                      <option value="Varanasi">Varanasi — Cantt</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Date -->
+              <div class="row g-3 mb-5">
+                <div class="col-md-6">
+                  <label class="form-label fw-bold text-primary fs-sm mb-2"><i class="fa-regular fa-calendar me-1"></i> DATE OF TRAVEL</label>
+                  <div class="route-input-group">
+                    <i class="fa-regular fa-calendar input-icon"></i>
+                    <input type="date" class="form-control" id="travelDate">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-bold text-primary fs-sm mb-2"><i class="fa-solid fa-users me-1"></i> PASSENGERS</label>
+                  <div class="route-input-group">
+                    <i class="fa-solid fa-users input-icon"></i>
+                    <select class="form-select" id="passengerCount">
+                      <option value="1">1 Passenger</option>
+                      <option value="2">2 Passengers</option>
+                      <option value="3">3 Passengers</option>
+                      <option value="4">4 Passengers</option>
+                      <option value="5">5 Passengers</option>
+                      <option value="6">6+ Passengers (Group)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bus Class Selection -->
+              <div class="step-section-title"><i class="fa-solid fa-bus"></i> Choose Bus Class</div>
+              <div class="bus-class-grid mb-5" id="busClassGrid">
+                <div class="bus-class-card" data-class="AC Sleeper" data-price="1500">
+                  <div class="check-badge"><i class="fa-solid fa-check"></i></div>
+                  <div class="bus-icon-circle"><i class="fa-solid fa-bed"></i></div>
+                  <div class="bus-name">Maharaja Sleeper</div>
+                  <div class="bus-price">₹1,500</div>
+                  <div class="bus-tag">2+1 AC Sleeper</div>
+                </div>
+                <div class="bus-class-card" data-class="Volvo" data-price="1200">
+                  <div class="check-badge"><i class="fa-solid fa-check"></i></div>
+                  <div class="bus-icon-circle"><i class="fa-solid fa-bus"></i></div>
+                  <div class="bus-name">Volvo 9600</div>
+                  <div class="bus-price">₹1,200</div>
+                  <div class="bus-tag">Multi-Axle AC</div>
+                </div>
+                <div class="bus-class-card" data-class="Scania" data-price="1350">
+                  <div class="check-badge"><i class="fa-solid fa-check"></i></div>
+                  <div class="bus-icon-circle"><i class="fa-solid fa-bus-simple"></i></div>
+                  <div class="bus-name">Scania Luxury</div>
+                  <div class="bus-price">₹1,350</div>
+                  <div class="bus-tag">Metrolink Premium</div>
+                </div>
+                <div class="bus-class-card" data-class="Semi Sleeper" data-price="900">
+                  <div class="check-badge"><i class="fa-solid fa-check"></i></div>
+                  <div class="bus-icon-circle"><i class="fa-solid fa-couch"></i></div>
+                  <div class="bus-name">Semi Sleeper</div>
+                  <div class="bus-price">₹900</div>
+                  <div class="bus-tag">Express AC</div>
+                </div>
+                <div class="bus-class-card" data-class="Mini Bus" data-price="750">
+                  <div class="check-badge"><i class="fa-solid fa-check"></i></div>
+                  <div class="bus-icon-circle"><i class="fa-solid fa-van-shuttle"></i></div>
+                  <div class="bus-name">Mini Bus</div>
+                  <div class="bus-price">₹750</div>
+                  <div class="bus-tag">Corporate Deluxe</div>
+                </div>
+                <div class="bus-class-card" data-class="Tempo Traveller" data-price="600">
+                  <div class="check-badge"><i class="fa-solid fa-check"></i></div>
+                  <div class="bus-icon-circle"><i class="fa-solid fa-car-side"></i></div>
+                  <div class="bus-name">Tempo Traveller</div>
+                  <div class="bus-price">₹600</div>
+                  <div class="bus-tag">Luxury 12-Seater</div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-end">
+                <button class="step-nav-btn primary" onclick="goToStep(2)">
+                  Select Seats <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ STEP 2: Seat Selection ══ -->
+          <div class="booking-step-panel" id="step-panel-2">
+            <div class="glass-card bg-white p-4 p-lg-5">
+
+              <div class="step-section-title"><i class="fa-solid fa-chair"></i> Select Your Seats</div>
+
+              <div class="seat-legend">
+                <div class="seat-legend-item"><div class="legend-box legend-available"></div> Available</div>
+                <div class="seat-legend-item"><div class="legend-box legend-booked"></div> Booked</div>
+                <div class="seat-legend-item"><div class="legend-box legend-selected"></div> Your Selection</div>
+              </div>
+
+              <!-- Bus Seat Map -->
+              <div class="seat-map-container">
+                <div class="bus-front">
+                  <div class="bus-front-shape"><i class="fa-solid fa-steering-wheel me-2"></i> DRIVER — FRONT</div>
+                </div>
+                <div id="seatMapGrid"></div>
+              </div>
+
+              <!-- Selected Seats -->
+              <div class="mt-4">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                  <span class="fw-bold" style="color:#1B3D7E; font-size:0.85rem;">SELECTED SEATS:</span>
+                  <span id="selectedCount" class="fw-bold" style="color:#D4A030;">0 seats</span>
+                </div>
+                <div class="selected-seats-tags" id="selectedSeatsTags">
+                  <span class="text-muted" style="font-size:0.85rem;" id="noSeatMsg">Click seats above to select them...</span>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between mt-5">
+                <button class="step-nav-btn secondary" onclick="goToStep(1)">
+                  <i class="fa-solid fa-arrow-left"></i> Back
+                </button>
+                <button class="step-nav-btn primary" onclick="goToStep(3)">
+                  Passenger Info <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ STEP 3: Passenger Info ══ -->
+          <div class="booking-step-panel" id="step-panel-3">
+            <div class="glass-card bg-white p-4 p-lg-5">
+
+              <div class="step-section-title"><i class="fa-solid fa-user"></i> Passenger Information</div>
+              <form id="bookingForm" novalidate>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="premium-input-group">
+                      <label><i class="fa-regular fa-user"></i> Full Name *</label>
+                      <input type="text" class="form-control" id="passengerName" placeholder="Enter full name" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="premium-input-group">
+                      <label><i class="fa-solid fa-phone"></i> Mobile Number *</label>
+                      <input type="tel" class="form-control" id="passengerPhone" placeholder="10-digit phone number" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="premium-input-group">
+                      <label><i class="fa-regular fa-envelope"></i> Email Address</label>
+                      <input type="email" class="form-control" id="passengerEmail" placeholder="your@email.com">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="premium-input-group">
+                      <label><i class="fa-solid fa-id-card"></i> ID Proof Type</label>
+                      <select class="form-select" id="idProof">
+                        <option value="">Select ID Proof</option>
+                        <option value="Aadhaar">Aadhaar Card</option>
+                        <option value="PAN">PAN Card</option>
+                        <option value="Passport">Passport</option>
+                        <option value="Voter">Voter ID</option>
+                        <option value="DL">Driving License</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="premium-input-group">
+                      <label><i class="fa-regular fa-note-sticky"></i> Special Requests / Tour Package</label>
+                      <textarea class="form-control" id="specialRequest" rows="3" placeholder="E.g., senior citizen seat, extra luggage, wheelchair access, tour name..."></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Terms -->
+                <div class="d-flex align-items-start gap-3 p-4 rounded-3 mt-2 mb-4" style="background:#f0faff; border:1px solid #ddeef8;">
+                  <input type="checkbox" class="form-check-input mt-1" id="termsCheck" style="min-width:18px; height:18px;">
+                  <label for="termsCheck" class="text-muted small">I agree to the <a href="terms.html" class="fw-bold" style="color:#1B3D7E;">Terms & Conditions</a> and <a href="privacy.html" class="fw-bold" style="color:#1B3D7E;">Privacy Policy</a> of Shree Balaji Bus Travels. I understand that ticket confirmation is subject to seat availability.</label>
+                </div>
+
+                <div class="d-flex flex-wrap gap-3 justify-content-between">
+                  <button type="button" class="step-nav-btn secondary" onclick="goToStep(2)">
+                    <i class="fa-solid fa-arrow-left"></i> Back
+                  </button>
+                  <div class="d-flex gap-3 flex-wrap">
+                    <button type="button" id="btnWhatsappBooking" class="step-nav-btn whatsapp">
+                      <i class="fa-brands fa-whatsapp"></i> WhatsApp Booking
+                    </button>
+                    <button type="submit" class="step-nav-btn crimson">
+                      <i class="fa-solid fa-credit-card"></i> Confirm Booking
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT: Fare Summary -->
+        <div class="col-lg-4">
+          <div class="fare-summary-card" data-aos="fade-left">
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <div style="width:48px;height:48px;border-radius:50%;background:rgba(0,180,200,0.2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#00B4C8;">
+                <i class="fa-solid fa-receipt"></i>
+              </div>
+              <div>
+                <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.5);">Booking Summary</div>
+                <div style="font-size:1.1rem;font-weight:800;color:white;">Fare Breakdown</div>
+              </div>
+            </div>
+
+            <div class="fare-row">
+              <span style="color:rgba(255,255,255,0.65);">Route</span>
+              <span id="summaryRoute" class="fw-bold" style="color:white; font-size:0.85rem; text-align:right; max-width:55%;">Not selected</span>
+            </div>
+            <div class="fare-row">
+              <span style="color:rgba(255,255,255,0.65);">Travel Date</span>
+              <span id="summaryDate" class="fw-bold" style="color:white; font-size:0.85rem;">—</span>
+            </div>
+            <div class="fare-row">
+              <span style="color:rgba(255,255,255,0.65);">Bus Class</span>
+              <span id="summaryClass" class="fw-bold" style="color:#00B4C8; font-size:0.85rem;">—</span>
+            </div>
+            <div class="fare-row">
+              <span style="color:rgba(255,255,255,0.65);">Seats</span>
+              <span id="summarySeats" class="fw-bold" style="color:#D4A030; font-size:0.85rem;">None selected</span>
+            </div>
+            <div class="fare-row">
+              <span style="color:rgba(255,255,255,0.65);">Base Fare</span>
+              <span id="summaryBaseFare" class="fw-bold" style="color:white;">₹0</span>
+            </div>
+            <div class="fare-row">
+              <span style="color:rgba(255,255,255,0.65);">GST (5%)</span>
+              <span id="summaryGST" class="fw-bold" style="color:white;">₹0</span>
+            </div>
+            <div class="fare-row" style="border-top:1px solid rgba(255,255,255,0.2); margin-top:6px; padding-top:16px;">
+              <span style="font-size:0.85rem;font-weight:700;color:rgba(255,255,255,0.8);">TOTAL PAYABLE</span>
+              <span class="fare-total" id="summaryTotal">₹0</span>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="trust-badges">
+              <div class="trust-badge">
+                <i class="fa-solid fa-shield-halved"></i> Secure Booking
+              </div>
+              <div class="trust-badge">
+                <i class="fa-solid fa-rotate-left"></i> Easy Refund
+              </div>
+              <div class="trust-badge">
+                <i class="fa-brands fa-whatsapp"></i> Instant Confirm
+              </div>
+            </div>
+
+            <!-- Contact -->
+            <div style="background:rgba(0,180,200,0.12); border-radius:14px; padding:16px; margin-top:20px; border:1px solid rgba(0,180,200,0.2);">
+              <div style="font-size:0.78rem; font-weight:700; color:rgba(255,255,255,0.6); margin-bottom:10px; text-transform:uppercase; letter-spacing:0.08em;">Need help?</div>
+              <a href="tel:+919999999999" style="color:white; text-decoration:none; display:flex; align-items:center; gap:10px; margin-bottom:8px; font-size:0.9rem; font-weight:600;">
+                <i class="fa-solid fa-phone" style="color:#00B4C8;"></i> +91 9302204519
+              </a>
+              <a href="https://wa.me/919999999999" target="_blank" style="color:white; text-decoration:none; display:flex; align-items:center; gap:10px; font-size:0.9rem; font-weight:600;">
+                <i class="fa-brands fa-whatsapp" style="color:#25d366;"></i> Chat on WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SUCCESS MODAL ── -->
+  <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content glass-card bg-white border-0 rounded-4 overflow-hidden">
+        <div style="background:linear-gradient(135deg,#1B3D7E,#00B4C8); padding:30px; text-align:center; color:white;">
+          <div style="width:70px;height:70px;background:rgba(255,255,255,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:2rem;">
+            <i class="fa-solid fa-circle-check" style="color:#D4A030;"></i>
+          </div>
+          <h4 class="fw-bold mb-1">Booking Confirmed!</h4>
+          <p class="mb-0" style="opacity:0.75;font-size:0.9rem;">Safe Travels with Shree Balaji Travels</p>
+          <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="p-4">
+          <div id="bookingSummary" class="mb-4"></div>
+          <button type="button" class="step-nav-btn primary w-100 justify-content-center" data-bs-dismiss="modal">Close Window</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-0">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <a class="navbar-brand text-white d-block mb-3" href="index.html">
+            <i class="fa-solid fa-bus-simple me-2"></i>Shree Balaji<span> Travels</span>
+          </a>
+          <p>Leading luxury bus travel operator in India. Safe, comfortable, and timely trips matching global standards.</p>
+          <div class="footer-social-links">
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="fleet.html">Bus Fleet</a></li>
+            <li><a href="packages.html">Tour Packages</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h5>Our Services</h5>
+          <ul class="list-unstyled">
+            <li><a href="services.html">Corporate Rental</a></li>
+            <li><a href="services.html">Wedding Transport</a></li>
+            <li><a href="services.html">School Trips</a></li>
+            <li><a href="services.html">Pilgrimage Tours</a></li>
+            <li><a href="services.html">Airport Pickups</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h5>Newsletter</h5>
+          <p>Subscribe for exclusive travel offers and discounts.</p>
+          <form class="newsletter-form mt-3">
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="Email Address" required>
+              <button type="submit" class="btn">Join</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center">
+        <div>&copy; 2026 Shree Balaji Bus Travels. All Rights Reserved. | <a href="privacy.html" class="mx-1">Privacy</a> | <a href="terms.html" class="mx-1">Terms</a></div>
+        <div></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Widgets -->
+  <div class="floating-widgets">
+    <a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20book%20a%20bus." target="_blank" class="btn-floating btn-floating-whatsapp" title="WhatsApp Booking">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <a href="tel:+919999999999" class="btn-floating btn-floating-call" title="Call Now">
+      <i class="fa-solid fa-phone"></i>
+    </a>
+    <a href="#" class="btn-floating btn-floating-top" title="Back to Top">
+      <i class="fa-solid fa-arrow-up"></i>
+    </a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+  // ── BOOKING WIZARD LOGIC ──
+  let currentStep = 1;
+  let selectedClass = '';
+  let selectedClassPrice = 0;
+  let selectedSeats = [];
+  let bookedSeats = ['1B','2A','3C','4D','5A','6B','7C'];
+
+  // ── Step Navigation ──
+  function goToStep(step) {
+    // Validate step 1
+    if (step > 1 && !selectedClass) {
+      alert('Please select a Bus Class to continue.');
+      return;
+    }
+    if (step > 2 && selectedSeats.length === 0) {
+      alert('Please select at least one seat to continue.');
+      return;
+    }
+
+    document.getElementById('step-panel-' + currentStep).classList.remove('active');
+    document.getElementById('step-indicator-' + currentStep).classList.remove('active');
+    document.getElementById('step-indicator-' + currentStep).classList.add('completed');
+
+    currentStep = step;
+    document.getElementById('step-panel-' + currentStep).classList.add('active');
+    document.getElementById('step-indicator-' + currentStep).classList.add('active');
+    document.getElementById('step-indicator-' + currentStep).classList.remove('completed');
+
+    // Fill connectors
+    if (currentStep >= 2) document.getElementById('connector-1-2').classList.add('filled');
+    else document.getElementById('connector-1-2').classList.remove('filled');
+    if (currentStep >= 3) document.getElementById('connector-2-3').classList.add('filled');
+    else document.getElementById('connector-2-3').classList.remove('filled');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── Bus Class Selection ──
+  document.querySelectorAll('.bus-class-card').forEach(card => {
+    card.addEventListener('click', function () {
+      document.querySelectorAll('.bus-class-card').forEach(c => c.classList.remove('selected'));
+      this.classList.add('selected');
+      selectedClass = this.dataset.class;
+      selectedClassPrice = parseInt(this.dataset.price);
+      updateSummary();
+    });
+  });
+
+  // ── Swap Cities ──
+  document.getElementById('swapCities').addEventListener('click', function () {
+    const pickup = document.getElementById('pickupPoint');
+    const drop = document.getElementById('dropPoint');
+    const temp = pickup.value;
+    pickup.value = drop.value;
+    drop.value = temp;
+    updateSummary();
+  });
+
+  // ── Live Summary Updates ──
+  ['pickupPoint','dropPoint','travelDate','passengerCount'].forEach(id => {
+    document.getElementById(id).addEventListener('change', updateSummary);
+  });
+
+  function updateSummary() {
+    const pickup = document.getElementById('pickupPoint').value || '—';
+    const drop = document.getElementById('dropPoint').value || '—';
+    const date = document.getElementById('travelDate').value;
+    
+    document.getElementById('summaryRoute').textContent = pickup && drop ? `${pickup} → ${drop}` : 'Not selected';
+    document.getElementById('summaryDate').textContent = date ? new Date(date).toLocaleDateString('en-IN', {day:'numeric',month:'short',year:'numeric'}) : '—';
+    document.getElementById('summaryClass').textContent = selectedClass || '—';
+    document.getElementById('summarySeats').textContent = selectedSeats.length ? selectedSeats.join(', ') : 'None selected';
+
+    const baseFare = selectedSeats.length * selectedClassPrice;
+    const gst = Math.round(baseFare * 0.05);
+    const total = baseFare + gst;
+
+    document.getElementById('summaryBaseFare').textContent = '₹' + baseFare.toLocaleString('en-IN');
+    document.getElementById('summaryGST').textContent = '₹' + gst.toLocaleString('en-IN');
+    document.getElementById('summaryTotal').textContent = '₹' + total.toLocaleString('en-IN');
+  }
+
+  // ── Build Seat Map ──
+  const seatRows = [
+    ['1A','1B', null, '1C','1D'],
+    ['2A','2B', null, '2C','2D'],
+    ['3A','3B', null, '3C','3D'],
+    ['4A','4B', null, '4C','4D'],
+    ['5A','5B', null, '5C','5D'],
+    ['6A','6B', null, '6C','6D'],
+    ['7A','7B', null, '7C','7D'],
+    [null, null, null, null, '8D'], // Last row back seat
+  ];
+
+  function buildSeatMap() {
+    const grid = document.getElementById('seatMapGrid');
+    grid.innerHTML = '';
+    seatRows.forEach(row => {
+      const rowDiv = document.createElement('div');
+      rowDiv.className = 'seat-row';
+      row.forEach((seat, idx) => {
+        if (seat === null && idx === 2) {
+          // Aisle
+          const aisle = document.createElement('div');
+          aisle.className = 'seat-aisle';
+          aisle.innerHTML = '<i class="fa-solid fa-ellipsis-v"></i>';
+          rowDiv.appendChild(aisle);
+        } else if (seat === null) {
+          const empty = document.createElement('div');
+          empty.style.width = '38px';
+          empty.style.height = '38px';
+          rowDiv.appendChild(empty);
+        } else {
+          const btn = document.createElement('button');
+          btn.className = 'seat-btn';
+          btn.textContent = seat;
+          btn.dataset.seat = seat;
+          if (bookedSeats.includes(seat)) {
+            btn.classList.add('booked');
+            btn.disabled = true;
+          }
+          btn.addEventListener('click', () => toggleSeat(seat, btn));
+          rowDiv.appendChild(btn);
+        }
+      });
+      grid.appendChild(rowDiv);
+    });
+  }
+
+  function toggleSeat(seat, btn) {
+    if (btn.classList.contains('booked')) return;
+    if (btn.classList.contains('selected')) {
+      btn.classList.remove('selected');
+      selectedSeats = selectedSeats.filter(s => s !== seat);
+    } else {
+      btn.classList.add('selected');
+      selectedSeats.push(seat);
+    }
+    renderSelectedTags();
+    updateSummary();
+  }
+
+  function renderSelectedTags() {
+    const tagsContainer = document.getElementById('selectedSeatsTags');
+    const noMsg = document.getElementById('noSeatMsg');
+    const countEl = document.getElementById('selectedCount');
+    
+    tagsContainer.innerHTML = '';
+    countEl.textContent = selectedSeats.length + ' seat' + (selectedSeats.length !== 1 ? 's' : '');
+
+    if (selectedSeats.length === 0) {
+      const msg = document.createElement('span');
+      msg.className = 'text-muted';
+      msg.style.fontSize = '0.85rem';
+      msg.id = 'noSeatMsg';
+      msg.textContent = 'Click seats above to select them...';
+      tagsContainer.appendChild(msg);
+    } else {
+      selectedSeats.forEach(seat => {
+        const tag = document.createElement('span');
+        tag.className = 'seat-tag';
+        tag.innerHTML = `<i class="fa-solid fa-chair"></i> ${seat} <span class="remove-seat" onclick="removeSeat('${seat}')"><i class="fa-solid fa-xmark"></i></span>`;
+        tagsContainer.appendChild(tag);
+      });
+    }
+  }
+
+  function removeSeat(seat) {
+    selectedSeats = selectedSeats.filter(s => s !== seat);
+    const btn = document.querySelector(`.seat-btn[data-seat="${seat}"]`);
+    if (btn) btn.classList.remove('selected');
+    renderSelectedTags();
+    updateSummary();
+  }
+
+  // ── Booking Form Submission ──
+  document.getElementById('bookingForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const name = document.getElementById('passengerName').value.trim();
+    const phone = document.getElementById('passengerPhone').value.trim();
+    const terms = document.getElementById('termsCheck').checked;
+    
+    if (!name || !phone) { alert('Please fill in your name and phone number.'); return; }
+    if (!terms) { alert('Please accept the Terms & Conditions to proceed.'); return; }
+
+    const pickup = document.getElementById('pickupPoint').value;
+    const drop = document.getElementById('dropPoint').value;
+    const date = document.getElementById('travelDate').value;
+    const baseFare = selectedSeats.length * selectedClassPrice;
+    const gst = Math.round(baseFare * 0.05);
+    const total = baseFare + gst;
+
+    document.getElementById('bookingSummary').innerHTML = `
+      <div style="background:#f0faff;border-radius:14px;padding:20px;border:1px solid #ddeef8;">
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #e0ecf5;font-size:0.9rem;"><span style="color:#4a6080;">Name</span><strong>${name}</strong></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #e0ecf5;font-size:0.9rem;"><span style="color:#4a6080;">Route</span><strong>${pickup} → ${drop}</strong></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #e0ecf5;font-size:0.9rem;"><span style="color:#4a6080;">Seats</span><strong style="color:#D4A030;">${selectedSeats.join(', ') || 'Not specified'}</strong></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;font-size:1.1rem;"><span style="color:#4a6080;">Total Paid</span><strong style="color:#1B3D7E;font-size:1.3rem;">₹${total.toLocaleString('en-IN')}</strong></div>
+      </div>`;
+
+    new bootstrap.Modal(document.getElementById('successModal')).show();
+  });
+
+  // ── WhatsApp Booking ──
+  document.getElementById('btnWhatsappBooking').addEventListener('click', function () {
+    const name = document.getElementById('passengerName').value || 'Not provided';
+    const phone = document.getElementById('passengerPhone').value || 'Not provided';
+    const pickup = document.getElementById('pickupPoint').value || '—';
+    const drop = document.getElementById('dropPoint').value || '—';
+    const date = document.getElementById('travelDate').value || '—';
+    const seats = selectedSeats.join(', ') || 'Not selected';
+    const special = document.getElementById('specialRequest').value || 'None';
+    const baseFare = selectedSeats.length * selectedClassPrice;
+    const total = baseFare + Math.round(baseFare * 0.05);
+
+    const msg = `*🚌 Shree Balaji Bus Travels — Booking Request*\n\n` +
+      `👤 Name: ${name}\n📞 Phone: ${phone}\n\n` +
+      `📍 From: ${pickup}\n🏁 To: ${drop}\n📅 Date: ${date}\n🚌 Class: ${selectedClass || 'Not selected'}\n💺 Seats: ${seats}\n` +
+      `💰 Total Estimate: ₹${total.toLocaleString('en-IN')}\n\n📝 Special Request: ${special}`;
+
+    window.open('https://wa.me/919999999999?text=' + encodeURIComponent(msg), '_blank');
+  });
+
+  // ── Query Params Pre-fill ──
+  document.addEventListener('DOMContentLoaded', () => {
+    buildSeatMap();
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('pickup')) document.getElementById('pickupPoint').value = params.get('pickup');
+    if (params.has('drop')) document.getElementById('dropPoint').value = params.get('drop');
+    if (params.has('date')) document.getElementById('travelDate').value = params.get('date');
+    if (params.has('specialRequest')) document.getElementById('specialRequest').value = params.get('specialRequest');
+    if (params.has('busType')) {
+      const busType = params.get('busType');
+      document.querySelectorAll('.bus-class-card').forEach(card => {
+        if (card.dataset.class === busType) {
+          card.click();
+        }
+      });
+    }
+    updateSummary();
+  });
+  </script>
+</body>
+</html>

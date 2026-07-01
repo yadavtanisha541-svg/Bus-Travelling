@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Shree Balaji Bus Travels</title>
+  
+  <meta name="description" content="Contact Shree Balaji Bus Travels for queries, bookings, cancellations, corporate rentals, or support. Office address, emergency contact numbers, and maps.">
+  <link rel="icon" type="image/png" href="https://img.icons8.com/color/48/bus.png">
+
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- AOS Scroll Animations CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Custom Cursor Elements -->
+  <div class="custom-cursor"></div>
+  <div class="custom-cursor-follower"></div>
+
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
+
+  <!-- Preloader Screen -->
+  <div id="preloader">
+    <div class="loader-bus"><i class="fa-solid fa-bus"></i></div>
+    <div class="loader-road"></div>
+  </div>
+
+  <!-- --- NAVIGATION HEADER --- -->
+  <header>
+    <nav class="navbar navbar-expand-lg fixed-top sticky">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <i class="fa-solid fa-bus-simple me-2 text-primary"></i>Shree Balaji<span> Travels</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+          <div class="navbar-toggler-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <div class="navbar-brand-divider d-none d-lg-block"></div>
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="fleet.html">Fleet</a></li>
+            <li class="nav-item"><a class="nav-link" href="packages.html">Packages</a></li>
+            <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+            <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+            
+            <li class="nav-item"><a class="nav-link" href="booking.html">Booking</a></li>
+            <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- --- BREADCRUMB HERO --- -->
+  <section class="section-padding pb-5 mt-5" style="background: radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.05) 0%, rgba(255,255,255,1) 100%);">
+    <div class="container text-center pt-5">
+      <span class="section-tag">Reach Us</span>
+      <h1 class="font-headings fw-bold text-primary display-4">Contact Our Office</h1>
+      <p class="text-muted max-width-600 mx-auto">Get in touch with us for booking cancellations, custom packages, or emergency road support.</p>
+    </div>
+  </section>
+
+  <!-- --- CONTACT INFO & FORM --- -->
+  <section class="pb-5">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Left: Form -->
+        <div class="col-lg-7" data-aos="fade-right">
+          <div class="glass-card p-5 bg-white">
+            <h4 class="font-headings fw-bold text-primary mb-3">Send a Message</h4>
+            <form id="contactForm">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="contactName" class="form-label fw-bold text-primary small">Full Name</label>
+                  <input type="text" class="form-control" id="contactName" placeholder="Enter name" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="contactEmail" class="form-label fw-bold text-primary small">Email Address</label>
+                  <input type="email" class="form-control" id="contactEmail" placeholder="Enter email" required>
+                </div>
+                <div class="col-12">
+                  <label for="contactPhone" class="form-label fw-bold text-primary small">Mobile Number</label>
+                  <input type="tel" class="form-control" id="contactPhone" placeholder="Enter mobile number" required>
+                </div>
+                <div class="col-12">
+                  <label for="contactSubject" class="form-label fw-bold text-primary small">Subject</label>
+                  <input type="text" class="form-control" id="contactSubject" placeholder="Enter message subject" required>
+                </div>
+                <div class="col-12">
+                  <label for="contactMessage" class="form-label fw-bold text-primary small">Your Message</label>
+                  <textarea class="form-control" id="contactMessage" rows="4" placeholder="Type message here..." required></textarea>
+                </div>
+                <div class="col-12 mt-4">
+                  <button type="submit" class="btn-premium btn-premium-primary w-100 justify-content-center py-3">Send Inquiry Message</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Right: Contacts info -->
+        <div class="col-lg-5" data-aos="fade-left">
+          <div class="glass-card p-5 h-100 bg-white d-flex flex-column justify-content-between">
+            <div>
+              <h4 class="font-headings fw-bold text-primary mb-4">Support Details</h4>
+              
+              <!-- Address -->
+              <div class="contact-info-item">
+                <div class="contact-info-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="contact-info-content">
+                  <h5>Main Office Address</h5>
+                  <p>Shree Balaji Travels, Sector-5, Majestic Bus Stand Road, Bangalore - 560009</p>
+                </div>
+              </div>
+
+              <!-- Phone -->
+              <div class="contact-info-item">
+                <div class="contact-info-icon"><i class="fa-solid fa-phone-volume"></i></div>
+                <div class="contact-info-content">
+                  <h5>Phone & Mobile</h5>
+                  <p>+91 9302204519<br>+91 9302204519</p>
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="contact-info-item">
+                <div class="contact-info-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                <div class="contact-info-content">
+                  <h5>Email Support</h5>
+                  <p>support@shreebalajitravels.com<br>bookings@shreebalajitravels.com</p>
+                </div>
+              </div>
+
+              <!-- Hours -->
+              <div class="contact-info-item">
+                <div class="contact-info-icon"><i class="fa-regular fa-clock"></i></div>
+                <div class="contact-info-content">
+                  <h5>Business Hours</h5>
+                  <p>Daily: 07:00 AM - 11:30 PM</p>
+                </div>
+              </div>
+
+            <!-- Social Links -->
+            <div class="mt-4">
+              <h5 class="font-headings text-primary fw-bold mb-3">Connect Socially</h5>
+              <div class="footer-social-links">
+                <a href="#" class="footer-social-link bg-primary text-white"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="footer-social-link bg-danger text-white"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="footer-social-link bg-info text-white"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="footer-social-link bg-primary text-white"><i class="fa-brands fa-linkedin-in"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- GOOGLE MAP INTEGRATION --- -->
+  <section class="section-padding p-0 border-top mt-5">
+    <div class="container-fluid p-0">
+      <div class="position-relative" style="height: 450px;">
+        <iframe src="https://maps.google.com/maps?q=India&t=&z=5&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <!-- Overlay Button -->
+        <div class="position-absolute bottom-0 start-0 m-4">
+          <a href="https://maps.google.com/?q=India" target="_blank" class="btn-premium btn-premium-primary">
+            Get Directions <i class="fa-solid fa-diamond-turn-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- FOOTER --- -->
+  <footer class="mt-0">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <a class="navbar-brand text-white d-block mb-3" href="index.html">
+            <i class="fa-solid fa-bus-simple me-2 text-primary"></i>Shree Balaji<span> Travels</span>
+          </a>
+          <p>Leading luxury bus travel operator in India. Safe, comfortable, and timely trips matching global standards.</p>
+          <div class="footer-social-links">
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="fleet.html">Bus Fleet</a></li>
+            <li><a href="packages.html">Tour Packages</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h5>Our Services</h5>
+          <ul class="list-unstyled">
+            <li><a href="services.html">Corporate Rental</a></li>
+            <li><a href="services.html">Wedding Transport</a></li>
+            <li><a href="services.html">School Trips</a></li>
+            <li><a href="services.html">Pilgrimage Tours</a></li>
+            <li><a href="services.html">Airport Pickups</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h5>Newsletter</h5>
+          <p>Subscribe for exclusive travel offers and discounts.</p>
+          <form class="newsletter-form mt-3">
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="Email Address" required>
+              <button type="submit" class="btn">Join</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center">
+        <div>
+          &copy; 2026 Shree Balaji Bus Travels. All Rights Reserved. | <a href="privacy.html" class="mx-1">Privacy</a> | <a href="terms.html" class="mx-1">Terms</a>
+        </div>
+        <div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- --- FLOATING FLOATING WIDGETS --- -->
+  <div class="floating-widgets">
+    <a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20book%20a%20bus." target="_blank" class="btn-floating btn-floating-whatsapp" title="WhatsApp Booking">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <a href="tel:+919999999999" class="btn-floating btn-floating-call" title="Emergency Call Now">
+      <i class="fa-solid fa-phone"></i>
+    </a>
+    <a href="#" class="btn-floating btn-floating-top" title="Back to Top">
+      <i class="fa-solid fa-arrow-up"></i>
+    </a>
+  </div>
+
+  <!-- Bootstrap 5 Bundle JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS Scroll Animation Library CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for contacting us! Our representative will respond to your query shortly.');
+      document.getElementById('contactForm').reset();
+    });
+  </script>
+  <!-- Core script -->
+  <script src="js/main.js"></script>
+</body>
+</html>

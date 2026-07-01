@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Bus Fleet - Shree Balaji Bus Travels</title>
+  
+  <meta name="description" content="Explore our premium fleet of Volvo, Scania, AC Sleeper & Semi Sleeper luxury buses. Rent or book tickets for clean, modern coaches.">
+  <link rel="icon" type="image/png" href="https://img.icons8.com/color/48/bus.png">
+
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- AOS Scroll Animations CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Custom Cursor Elements -->
+  <div class="custom-cursor"></div>
+  <div class="custom-cursor-follower"></div>
+
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
+
+  <!-- Preloader Screen -->
+  <div id="preloader">
+    <div class="loader-bus"><i class="fa-solid fa-bus"></i></div>
+    <div class="loader-road"></div>
+  </div>
+
+  <!-- --- NAVIGATION HEADER --- -->
+  <header>
+    <nav class="navbar navbar-expand-lg fixed-top sticky">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <i class="fa-solid fa-bus-simple me-2 text-primary"></i>Shree Balaji<span> Travels</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+          <div class="navbar-toggler-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <div class="navbar-brand-divider d-none d-lg-block"></div>
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link active" href="fleet.html">Fleet</a></li>
+            <li class="nav-item"><a class="nav-link" href="packages.html">Packages</a></li>
+            <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+            <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="booking.html">Booking</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- --- BREADCRUMB HERO --- -->
+  <section class="section-padding pb-5 mt-5" style="background: radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.05) 0%, rgba(255,255,255,1) 100%);">
+    <div class="container text-center pt-5">
+      <span class="section-tag">Premium Ride</span>
+      <h1 class="font-headings fw-bold text-primary display-4">Our Bus Fleet</h1>
+      <p class="text-muted max-width-600 mx-auto">Take your pick from our range of high-performance luxury coaches and minibuses.</p>
+    </div>
+  </section>
+
+  <!-- --- SEARCH & FILTER SECTION --- -->
+  <section class="py-4 bg-light border-bottom border-top">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-text bg-white border-end-0 text-muted"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input type="text" id="searchFleet" class="form-control border-start-0 ps-0" placeholder="Search by bus name (e.g., Volvo)...">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <select id="filterFleetType" class="form-select">
+            <option value="all">All Bus Categories</option>
+            <option value="sleeper">AC Sleeper Coaches</option>
+            <option value="volvo">Volvo Coaches</option>
+            <option value="scania">Scania Multi-Axle</option>
+            <option value="seater">Semi Sleeper / Seater</option>
+            <option value="mini">Mini Bus / Traveller</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- FLEET CARDS GRID --- -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="row" id="fleetContainer">
+        <!-- Bus 1: AC Sleeper -->
+        <div class="col-lg-4 col-md-6 fleet-card-item" data-bus-type="sleeper" data-aos="fade-up" data-aos-delay="100">
+          <div class="fleet-card glass-card">
+            <div class="fleet-card-img-wrapper">
+              <span class="card-badge">Best Seller</span>
+              <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80" alt="AC Sleeper Bus" class="fleet-card-img">
+            </div>
+            <div class="card-body-custom">
+              <h3 class="card-title text-primary font-headings fw-bold fs-4">Maharaja AC Sleeper (2+1)</h3>
+              <p class="text-muted small mb-2">Ideal for overnight journeys. Equipped with wide sleeping berths, privacy curtains, and soft pillows.</p>
+              
+              <div class="d-flex justify-content-between align-items-center mb-3 text-secondary">
+                <span><i class="fa-solid fa-chair me-1 text-primary"></i> 30 Berths</span>
+                <span><i class="fa-solid fa-tag me-1 text-primary"></i> AC Sleeper</span>
+              </div>
+
+              <div class="facility-icons">
+                <i class="fa-solid fa-wifi facility-icon-tooltip" data-tooltip="High-speed Wi-Fi"></i>
+                <i class="fa-solid fa-plug facility-icon-tooltip" data-tooltip="USB Charger"></i>
+                <i class="fa-solid fa-location-dot facility-icon-tooltip" data-tooltip="GPS Tracking"></i>
+                <i class="fa-solid fa-bottle-water facility-icon-tooltip" data-tooltip="Mineral Water"></i>
+                <i class="fa-solid fa-shield-halved facility-icon-tooltip" data-tooltip="CCTV Secured"></i>
+              </div>
+
+              <a href="booking.html?busType=AC Sleeper" class="btn-premium btn-premium-primary w-100 justify-content-center mt-3">Book This Bus</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bus 2: Volvo -->
+        <div class="col-lg-4 col-md-6 fleet-card-item" data-bus-type="volvo" data-aos="fade-up" data-aos-delay="200">
+          <div class="fleet-card glass-card">
+            <div class="fleet-card-img-wrapper">
+              <span class="card-badge">Ultra Luxury</span>
+              <img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=800&q=80" alt="Volvo Multi Axle" class="fleet-card-img">
+            </div>
+            <div class="card-body-custom">
+              <h3 class="card-title text-primary font-headings fw-bold fs-4">Volvo 9600 Multi-Axle</h3>
+              <p class="text-muted small mb-2">Premium European air suspension coach offering zero vibrations and smooth gliding on highways.</p>
+              
+              <div class="d-flex justify-content-between align-items-center mb-3 text-secondary">
+                <span><i class="fa-solid fa-chair me-1 text-primary"></i> 42 Recliners</span>
+                <span><i class="fa-solid fa-tag me-1 text-primary"></i> Volvo Multi-Axle</span>
+              </div>
+
+              <div class="facility-icons">
+                <i class="fa-solid fa-wifi facility-icon-tooltip" data-tooltip="High-speed Wi-Fi"></i>
+                <i class="fa-solid fa-plug facility-icon-tooltip" data-tooltip="USB Charger"></i>
+                <i class="fa-solid fa-location-dot facility-icon-tooltip" data-tooltip="GPS Tracking"></i>
+                <i class="fa-solid fa-tv facility-icon-tooltip" data-tooltip="Central TV screen"></i>
+                <i class="fa-solid fa-snowflake facility-icon-tooltip" data-tooltip="Climate Control"></i>
+              </div>
+
+              <a href="booking.html?busType=Volvo" class="btn-premium btn-premium-primary w-100 justify-content-center mt-3">Book This Bus</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bus 3: Scania -->
+        <div class="col-lg-4 col-md-6 fleet-card-item" data-bus-type="scania" data-aos="fade-up" data-aos-delay="300">
+          <div class="fleet-card glass-card">
+            <div class="fleet-card-img-wrapper">
+              <span class="card-badge">Premium</span>
+              <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80" alt="Scania Coach" class="fleet-card-img">
+            </div>
+            <div class="card-body-custom">
+              <h3 class="card-title text-primary font-headings fw-bold fs-4">Scania Metrolink Luxury</h3>
+              <p class="text-muted small mb-2">State-of-the-art Swedish bus featuring top-tier safety indicators, lane assist, and comfortable recliners.</p>
+              
+              <div class="d-flex justify-content-between align-items-center mb-3 text-secondary">
+                <span><i class="fa-solid fa-chair me-1 text-primary"></i> 45 Recliners</span>
+                <span><i class="fa-solid fa-tag me-1 text-primary"></i> Scania Premium</span>
+              </div>
+
+              <div class="facility-icons">
+                <i class="fa-solid fa-wifi facility-icon-tooltip" data-tooltip="High-speed Wi-Fi"></i>
+                <i class="fa-solid fa-plug facility-icon-tooltip" data-tooltip="USB Charger"></i>
+                <i class="fa-solid fa-location-dot facility-icon-tooltip" data-tooltip="GPS Tracking"></i>
+                <i class="fa-solid fa-shield-halved facility-icon-tooltip" data-tooltip="CCTV Secured"></i>
+                <i class="fa-solid fa-bottle-water facility-icon-tooltip" data-tooltip="Mineral Water"></i>
+              </div>
+
+              <a href="booking.html?busType=Scania" class="btn-premium btn-premium-primary w-100 justify-content-center mt-3">Book This Bus</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bus 4: Semi Sleeper -->
+        <div class="col-lg-4 col-md-6 fleet-card-item" data-bus-type="seater" data-aos="fade-up" data-aos-delay="100">
+          <div class="fleet-card glass-card">
+            <div class="fleet-card-img-wrapper">
+              <span class="card-badge">Pocket Friendly</span>
+              <img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=800&q=80" alt="Semi Sleeper Bus" class="fleet-card-img">
+            </div>
+            <div class="card-body-custom">
+              <h3 class="card-title text-primary font-headings fw-bold fs-4">Express Semi-Sleeper AC</h3>
+              <p class="text-muted small mb-2">Perfect for medium-distance daytime travel routes. Fitted with comfortable leg rests and recliners.</p>
+              
+              <div class="d-flex justify-content-between align-items-center mb-3 text-secondary">
+                <span><i class="fa-solid fa-chair me-1 text-primary"></i> 40 Seats</span>
+                <span><i class="fa-solid fa-tag me-1 text-primary"></i> Semi-Sleeper AC</span>
+              </div>
+
+              <div class="facility-icons">
+                <i class="fa-solid fa-plug facility-icon-tooltip" data-tooltip="USB Charger"></i>
+                <i class="fa-solid fa-location-dot facility-icon-tooltip" data-tooltip="GPS Tracking"></i>
+                <i class="fa-solid fa-snowflake facility-icon-tooltip" data-tooltip="Climate Control"></i>
+              </div>
+
+              <a href="booking.html?busType=Semi Sleeper" class="btn-premium btn-premium-primary w-100 justify-content-center mt-3">Book This Bus</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bus 5: Mini Bus -->
+        <div class="col-lg-4 col-md-6 fleet-card-item" data-bus-type="mini" data-aos="fade-up" data-aos-delay="200">
+          <div class="fleet-card glass-card">
+            <div class="fleet-card-img-wrapper">
+              <span class="card-badge">Events Rental</span>
+              <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80" alt="Mini Bus" class="fleet-card-img">
+            </div>
+            <div class="card-body-custom">
+              <h3 class="card-title text-primary font-headings fw-bold fs-4">Deluxe Corporate Mini Bus</h3>
+              <p class="text-muted small mb-2">Designed for corporate employees, wedding packages, or school day trips. Highly maneuverable.</p>
+              
+              <div class="d-flex justify-content-between align-items-center mb-3 text-secondary">
+                <span><i class="fa-solid fa-chair me-1 text-primary"></i> 25 Seats</span>
+                <span><i class="fa-solid fa-tag me-1 text-primary"></i> Deluxe Coach</span>
+              </div>
+
+              <div class="facility-icons">
+                <i class="fa-solid fa-plug facility-icon-tooltip" data-tooltip="USB Charger"></i>
+                <i class="fa-solid fa-location-dot facility-icon-tooltip" data-tooltip="GPS Tracking"></i>
+                <i class="fa-solid fa-snowflake facility-icon-tooltip" data-tooltip="AC Comfort"></i>
+              </div>
+
+              <a href="booking.html?busType=Mini Bus" class="btn-premium btn-premium-primary w-100 justify-content-center mt-3">Book This Bus</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bus 6: Tempo Traveller -->
+        <div class="col-lg-4 col-md-6 fleet-card-item" data-bus-type="mini" data-aos="fade-up" data-aos-delay="300">
+          <div class="fleet-card glass-card">
+            <div class="fleet-card-img-wrapper">
+              <span class="card-badge">Family Outing</span>
+              <img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=800&q=80" alt="Tempo Traveller" class="fleet-card-img">
+            </div>
+            <div class="card-body-custom">
+              <h3 class="card-title text-primary font-headings fw-bold fs-4">Luxury Force Tempo Traveller</h3>
+              <p class="text-muted small mb-2">Premium 1X1 push back seats layout, perfect for family tour plans or weekend getaways.</p>
+              
+              <div class="d-flex justify-content-between align-items-center mb-3 text-secondary">
+                <span><i class="fa-solid fa-chair me-1 text-primary"></i> 14 Seats</span>
+                <span><i class="fa-solid fa-tag me-1 text-primary"></i> Tempo Traveller</span>
+              </div>
+
+              <div class="facility-icons">
+                <i class="fa-solid fa-plug facility-icon-tooltip" data-tooltip="USB Charger"></i>
+                <i class="fa-solid fa-location-dot facility-icon-tooltip" data-tooltip="GPS Tracking"></i>
+                <i class="fa-solid fa-snowflake facility-icon-tooltip" data-tooltip="AC Comfort"></i>
+              </div>
+
+              <a href="booking.html?busType=Tempo Traveller" class="btn-premium btn-premium-primary w-100 justify-content-center mt-3">Book This Bus</a>
+            </div>
+          </div>
+        </div>
+  </section>
+
+
+  <!-- --- FOOTER --- -->
+  <footer class="mt-0">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <a class="navbar-brand text-white d-block mb-3" href="index.html">
+            <i class="fa-solid fa-bus-simple me-2 text-primary"></i>Shree Balaji<span> Travels</span>
+          </a>
+          <p>Leading luxury bus travel operator in India. Safe, comfortable, and timely trips matching global standards.</p>
+          <div class="footer-social-links">
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="fleet.html">Bus Fleet</a></li>
+            <li><a href="packages.html">Tour Packages</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h5>Our Services</h5>
+          <ul class="list-unstyled">
+            <li><a href="services.html">Corporate Rental</a></li>
+            <li><a href="services.html">Wedding Transport</a></li>
+            <li><a href="services.html">School Trips</a></li>
+            <li><a href="services.html">Pilgrimage Tours</a></li>
+            <li><a href="services.html">Airport Pickups</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h5>Newsletter</h5>
+          <p>Subscribe for exclusive travel offers and discounts.</p>
+          <form class="newsletter-form mt-3">
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="Email Address" required>
+              <button type="submit" class="btn">Join</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center">
+        <div>
+          &copy; 2026 Shree Balaji Bus Travels. All Rights Reserved. | <a href="privacy.html" class="mx-1">Privacy</a> | <a href="terms.html" class="mx-1">Terms</a>
+        </div>
+        <div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- --- FLOATING FLOATING WIDGETS --- -->
+  <div class="floating-widgets">
+    <a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20book%20a%20bus." target="_blank" class="btn-floating btn-floating-whatsapp" title="WhatsApp Booking">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <a href="tel:+919999999999" class="btn-floating btn-floating-call" title="Emergency Call Now">
+      <i class="fa-solid fa-phone"></i>
+    </a>
+    <a href="#" class="btn-floating btn-floating-top" title="Back to Top">
+      <i class="fa-solid fa-arrow-up"></i>
+    </a>
+  </div>
+
+  <!-- Bootstrap 5 Bundle JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS Scroll Animation Library CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <!-- Fleet filter script -->
+  <script src="js/fleet-packages.js"></script>
+  <!-- Core script -->
+  <script src="js/main.js"></script>
+</body>
+</html>
